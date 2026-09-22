@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Build output
+dist/
+server/dist/
+
+# Expo / Metro
+.expo/
+mobile/.expo/
+web-build/
+
+# User uploads (runtime data)
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Local tools and logs
+cloudflared.exe
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Not needed to run or review the project
+*_PROMPT.md
+HANDOFF.md
+reference/
+design/*.html
+assets/*.png
+application_*.jpeg

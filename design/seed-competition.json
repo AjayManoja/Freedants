@@ -1,0 +1,252 @@
+{
+  "_note": "Every value here is copied from the design reference. Seed MongoDB with it; the app must read it from the API, never hardcode it.",
+  "competition": {
+    "slug": "feedants-classical-dance",
+    "title": "Feedants Classical Dance",
+    "tags": [
+      "Dance",
+      "Multi-Win"
+    ],
+    "perks": [
+      "Winners get certificate"
+    ],
+    "currency": "INR",
+    "prizePool": 1500,
+    "entryFee": 99,
+    "capacity": 20,
+    "judge": {
+      "name": "Manju Dubey",
+      "title": "Professional Kathak Dancer",
+      "experience": "12+ Years of Experience",
+      "avatarUrl": "assets/thumbs/judge.jpg",
+      "introVideoUrl": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+    },
+    "dates": {
+      "_note": "The design shows only day/month and '26. Year 2026 and IST (+05:30) are assumptions. The design's 'Submission Starts' (6 Aug) is before 'Register Before' (10 Aug); keep it as designed.",
+      "registrationClosesAt": "2026-08-10T23:50:00+05:30",
+      "submissionStartsAt": "2026-08-06T04:00:00+05:30",
+      "submissionEndsAt": "2026-08-30T23:55:00+05:30",
+      "resultAt": "2026-09-01T23:50:00+05:30"
+    },
+    "about": [
+      "This is an online classical dance competition open for all age groups.",
+      "Participate from anywhere and showcase your talent.",
+      "Express your passion through traditional dance."
+    ],
+    "judgingParameters": [
+      "Technique & precision – footwork, mudras and posture (30%).",
+      "Expression (Abhinaya) – conveying emotion and storytelling (25%).",
+      "Rhythm & timing – sync with taal and music (20%).",
+      "Costume & presentation – authenticity to the dance form (15%).",
+      "Overall impact and originality of choreography (10%)."
+    ],
+    "rules": [
+      "Open to all ages; participants under 18 need a parent's consent.",
+      "Any Indian classical form is allowed – Kathak, Bharatanatyam, Odissi, Kuchipudi and more.",
+      "Upload one solo video, 2–5 minutes long, in MP4 or MOV (max 50 MB).",
+      "The video must be unedited, recorded in a single take, with your face clearly visible.",
+      "Entries uploaded after the submission deadline will not be judged.",
+      "The judge's decision is final. Prize money is credited within 7 days of results."
+    ],
+    "rewards": [
+      {
+        "position": 1,
+        "label": "1st Winner",
+        "amount": 550,
+        "icon": "trophy"
+      },
+      {
+        "position": 2,
+        "label": "2nd Winner",
+        "amount": 300,
+        "icon": "silver"
+      },
+      {
+        "position": 3,
+        "label": "3rd Winner",
+        "amount": 240,
+        "icon": "bronze"
+      },
+      {
+        "position": 4,
+        "label": "4th Winner",
+        "amount": 200,
+        "icon": "star"
+      },
+      {
+        "position": 5,
+        "label": "5th Winner",
+        "amount": 130,
+        "icon": "star"
+      },
+      {
+        "position": 6,
+        "label": "6th Winner",
+        "amount": 80,
+        "icon": "star"
+      }
+    ],
+    "disclaimer": "Only contributions from paid participants will be considered for judging.",
+    "previousWinners": [
+      {
+        "name": "Riya Shah",
+        "position": "1st Winner",
+        "thumbUrl": "assets/thumbs/w1.jpg",
+        "videoUrl": "https://test-videos.co.uk/vids/sintel/mp4/h264/360/Sintel_360_10s_1MB.mp4"
+      },
+      {
+        "name": "Aarav Mehta",
+        "position": "1st Winner",
+        "thumbUrl": "assets/thumbs/w2.jpg",
+        "videoUrl": "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4"
+      },
+      {
+        "name": "Neha Verma",
+        "position": "2nd Winner",
+        "thumbUrl": "assets/thumbs/w3.jpg",
+        "videoUrl": "https://test-videos.co.uk/vids/jellyfish/mp4/h264/360/Jellyfish_360_10s_1MB.mp4"
+      },
+      {
+        "name": "Ishita Chawla",
+        "position": "3rd Winner",
+        "thumbUrl": "assets/thumbs/w4.jpg",
+        "videoUrl": "https://download.samplelib.com/mp4/sample-5s.mp4"
+      }
+    ],
+    "referral": {
+      "rewardPerSignup": 10,
+      "baseUrl": "https://feedants.com/r/"
+    },
+    "prizeInfoVideoUrl": "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4",
+    "submissionRules": {
+      "maxSizeMb": 50,
+      "acceptedFormats": [
+        "mp4",
+        "mov"
+      ]
+    },
+    "translations": {
+      "hi": {
+        "title": "फीडएंट्स शास्त्रीय नृत्य",
+        "tags": [
+          "नृत्य",
+          "मल्टी-विन"
+        ],
+        "perks": [
+          "विजेताओं को प्रमाणपत्र"
+        ],
+        "judge": {
+          "name": "मंजू दुबे",
+          "title": "पेशेवर कथक नृत्यांगना",
+          "experience": "12+ वर्षों का अनुभव"
+        },
+        "about": [
+          "यह सभी आयु वर्गों के लिए खुली एक ऑनलाइन शास्त्रीय नृत्य प्रतियोगिता है।",
+          "कहीं से भी भाग लें और अपनी प्रतिभा दिखाएँ।",
+          "पारंपरिक नृत्य के माध्यम से अपने जुनून को व्यक्त करें।"
+        ],
+        "judgingParameters": [
+          "तकनीक और सटीकता – पदचाल, मुद्राएँ और मुद्रा-स्थिति (30%)।",
+          "अभिनय – भाव और कथा की अभिव्यक्ति (25%)।",
+          "लय और ताल – ताल और संगीत के साथ तालमेल (20%)।",
+          "वेशभूषा और प्रस्तुति – नृत्य शैली के प्रति प्रामाणिकता (15%)।",
+          "समग्र प्रभाव और नृत्य-रचना की मौलिकता (10%)।"
+        ],
+        "rules": [
+          "सभी आयु के लिए खुला; 18 वर्ष से कम आयु के प्रतिभागियों को माता-पिता की सहमति आवश्यक है।",
+          "कोई भी भारतीय शास्त्रीय नृत्य शैली मान्य है – कथक, भरतनाट्यम, ओडिसी, कुचिपुड़ी आदि।",
+          "एक एकल वीडियो अपलोड करें, 2–5 मिनट लंबा, MP4 या MOV में (अधिकतम 50 MB)।",
+          "वीडियो बिना संपादन के, एक ही टेक में रिकॉर्ड हो और आपका चेहरा स्पष्ट दिखे।",
+          "सबमिशन की अंतिम तिथि के बाद अपलोड की गई प्रविष्टियों का मूल्यांकन नहीं होगा।",
+          "निर्णायक का निर्णय अंतिम होगा। पुरस्कार राशि परिणाम के 7 दिनों के भीतर दी जाएगी।"
+        ],
+        "disclaimer": "केवल भुगतान करने वाले प्रतिभागियों की प्रविष्टियों का ही मूल्यांकन किया जाएगा।",
+        "rewards": {
+          "1": "प्रथम विजेता",
+          "2": "द्वितीय विजेता",
+          "3": "तृतीय विजेता",
+          "4": "चौथा विजेता",
+          "5": "पाँचवाँ विजेता",
+          "6": "छठा विजेता"
+        },
+        "previousWinners": [
+          {
+            "name": "रिया शाह",
+            "position": "प्रथम विजेता"
+          },
+          {
+            "name": "आरव मेहता",
+            "position": "प्रथम विजेता"
+          },
+          {
+            "name": "नेहा वर्मा",
+            "position": "द्वितीय विजेता"
+          },
+          {
+            "name": "इशिता चावला",
+            "position": "तृतीय विजेता"
+          }
+        ]
+      }
+    }
+  },
+  "demoUser": {
+    "referralCode": "referral123",
+    "avatarUrl": "assets/thumbs/profile.jpg",
+    "name": "Priya Sharma"
+  },
+  "testimonials": [
+    {
+      "name": "Ananya Iyer",
+      "meta": "Bharatanatyam · Chennai",
+      "rating": 5,
+      "text": "Won 2nd place in my first competition here! The judge’s feedback on my abhinaya was detailed and genuinely helpful.",
+      "translations": {
+        "hi": {
+          "name": "अनन्या अय्यर",
+          "meta": "भरतनाट्यम · चेन्नई",
+          "text": "यहाँ अपनी पहली ही प्रतियोगिता में दूसरा स्थान मिला! मेरे अभिनय पर निर्णायक की प्रतिक्रिया विस्तृत और सचमुच उपयोगी थी।"
+        }
+      }
+    },
+    {
+      "name": "Rohan Deshpande",
+      "meta": "Kathak · Pune",
+      "rating": 5,
+      "text": "Prize money reached my UPI account within 3 days of results. Registration and upload took less than five minutes.",
+      "translations": {
+        "hi": {
+          "name": "रोहन देशपांडे",
+          "meta": "कथक · पुणे",
+          "text": "परिणाम के 3 दिनों के भीतर पुरस्कार राशि मेरे UPI खाते में आ गई। पंजीकरण और अपलोड में पाँच मिनट से भी कम लगे।"
+        }
+      }
+    },
+    {
+      "name": "Meera Nair",
+      "meta": "Mohiniyattam · Kochi",
+      "rating": 4,
+      "text": "Loved being able to take part from home. I’d like longer video limits, but the whole experience felt fair and well run.",
+      "translations": {
+        "hi": {
+          "name": "मीरा नायर",
+          "meta": "मोहिनीअट्टम · कोच्चि",
+          "text": "घर से भाग ले पाना बहुत अच्छा लगा। वीडियो की सीमा थोड़ी लंबी होती तो बेहतर था, पर पूरा अनुभव निष्पक्ष और सुव्यवस्थित रहा।"
+        }
+      }
+    },
+    {
+      "name": "Kavya Reddy",
+      "meta": "Kuchipudi · Hyderabad",
+      "rating": 5,
+      "text": "My daughter took part in the junior round and got a certificate. She’s already practising for the next one!",
+      "translations": {
+        "hi": {
+          "name": "काव्या रेड्डी",
+          "meta": "कुचिपुड़ी · हैदराबाद",
+          "text": "मेरी बेटी ने जूनियर राउंड में भाग लिया और उसे प्रमाणपत्र मिला। वह अभी से अगली प्रतियोगिता की तैयारी कर रही है!"
+        }
+      }
+    }
+  ]
+}
