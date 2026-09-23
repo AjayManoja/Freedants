@@ -35,7 +35,7 @@ export function VideoModal({ visible, title, url, headers, onClose }: VideoModal
           {!!url && !failed && visible && (
             <Video
               source={{ uri: url, headers }}
-              style={StyleSheet.absoluteFill}
+              style={[StyleSheet.absoluteFill, { width: '100%', height: '100%' }]}
               resizeMode={ResizeMode.CONTAIN}
               shouldPlay
               useNativeControls
@@ -84,6 +84,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.videoBg,
     borderRadius: radius.md,
     overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
