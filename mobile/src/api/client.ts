@@ -1,6 +1,7 @@
 import { CompetitionResponse, Registration, Submission, Testimonial } from './types';
 import * as Crypto from 'expo-crypto';
 import Constants from 'expo-constants';
+import { Platform } from 'react-native';
 import { config } from '../config';
 
 // API base URL resolution, in order:
@@ -108,7 +109,17 @@ export async function confirmPayment(registrationId: string, success = true, pay
 export async function submitEntry(competitionId: string, fileUri: string, fileName: string, mimeType = 'video/mp4'): Promise<Submission> {
   const baseUrl = activeBaseUrl || CANDIDATE_URLS[0];
   const formData = new FormData();
-  formData.append('file', { uri: fileUri, name: fileName, type: mimeType } as any);
+  
+  if (Platform.OS === 'web') {
+    // On Web, passing {uri, name, type} stringifies it. We must fetch the blob and append it directly.
+    const res = await fetch(fileUri);
+    const blob = await res.blob();
+    formData.append('file', blob, fileName);
+  } else {
+    // Native (iOS/Android) FormData intercepts this object format
+    formData.append('file', { uri: fileUri, name: fileName, type: mimeType } as any);
+  }
+
   const res = await fetch(`${baseUrl}/competitions/${competitionId}/submissions`, {
     method: 'POST',
     headers: { 'X-Demo-User-Id': DEMO_USER_ID },
