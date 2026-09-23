@@ -147,7 +147,9 @@ export async function fetchSubmission(competitionId: string): Promise<Submission
  */
 export function authedMediaSource(apiPath: string): { uri: string; headers: Record<string, string> } {
   const base = activeBaseUrl || CANDIDATE_URLS[0];
-  return { uri: `${base}${apiPath}`, headers: { 'X-Demo-User-Id': DEMO_USER_ID } };
+  const sep = apiPath.includes('?') ? '&' : '?';
+  const uri = `${base}${apiPath}${sep}x-demo-user-id=${DEMO_USER_ID}`;
+  return { uri, headers: { 'X-Demo-User-Id': DEMO_USER_ID } };
 }
 
 /**
