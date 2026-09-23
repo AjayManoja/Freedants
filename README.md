@@ -288,13 +288,3 @@ Sheets close with a tap on the backdrop, the Android back button, or a swipe dow
 
 ---
 
-## Demo Recording
-
-The assignment asks for a short screen recording. It should show:
-
-1. The open state and the live countdown.
-2. Registering and paying: one failed payment (`failure@razorpay`), then a successful one.
-3. The registered state, then uploading a video.
-4. The submitted state and viewing the submission.
-5. The full and closed states, using `npm run state:*`.
-6. The Hindi toggle, videos, reviews and Copy Link.
