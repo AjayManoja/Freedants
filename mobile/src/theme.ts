@@ -4,7 +4,7 @@ import { ViewStyle } from 'react-native';
 // The original design is 390px wide with 18px side gutters.
 // All sizes below are the exact design px from Main.dc.html.
 export const GUTTER = 18;
-export const MAX_CONTENT_WIDTH = 560;
+export const MAX_CONTENT_WIDTH = 354;
 
 // ── Colours ──────────────────────────────────────────────
 export const colors = {

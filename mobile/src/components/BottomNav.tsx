@@ -99,7 +99,10 @@ const styles = StyleSheet.create({
     borderTopColor: colors.border, 
     flexDirection: 'row', 
     justifyContent: 'space-around', 
-    alignItems: 'center', 
+    alignItems: 'center',
+    width: '100%',
+    maxWidth: 390, // MAX_CONTENT_WIDTH + 2 * GUTTER
+    alignSelf: 'center',
   },
   item: {
     alignItems: 'center',

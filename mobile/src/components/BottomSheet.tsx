@@ -117,6 +117,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: space.lg,
     paddingBottom: space.xl,
     maxHeight: '88%',
+    width: '100%',
+    maxWidth: 390,
+    alignSelf: 'center',
   },
   // Taller than the visible handle so it's easy to grab
   handleArea: {
