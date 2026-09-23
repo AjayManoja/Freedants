@@ -237,22 +237,13 @@ Every response includes `serverTime`. The app stores the difference `serverTime 
 Caching, background refetch every 30 seconds, refetch when the app regains focus, and pull-to-refresh. After a mutation, the competition query is invalidated, so spots left and status update straight away.
 
 ### Responsive layout
-`useLayout()` in `mobile/src/theme.ts` reads the window width on every render, so rotation, split screen and foldables all work:
-
-| Width | Devices | Layout |
-|---|---|---|
-| < 360pt | small phones | Important Dates falls back to one column |
-| 360–409pt | most phones (iPhone 15, Pixel 7a) | Stacked rows from `MOBILE_SIZING.md` §4: spots block full width, prize and trust rows stacked, scrollable tabs, Refer buttons stacked |
-| ≥ 410pt | large phones (Pixel 8 Pro, iPhone Plus/Pro Max) | The design's side-by-side rows: Prize Pool, Entry Fee and Spots as three columns; prize video next to the trust rows; three equal tabs; Refer Now next to the earnings caption |
-| tablets | — | The content column is capped at 560pt and centred |
-
-The countdown stays on two lines on every phone. Its single-line design needs about 460pt at readable sizes, more than any phone offers.
+The layout strictly follows the 390px pixel-perfect design constraints. On Web and Desktop browsers, the application centers itself as a mobile-sized frame (390px wide) rather than stretching horizontally.
 
 ### Images
 The images in `assets/` are 1.5–2 MB each. The API links to optimised copies in `assets/thumbs/`: 256px for avatars and 360px for winner tiles, about 140 KB for all six. Remote images show a spinner until they load. Tapping anywhere on the judge card or a winner tile plays the video, not just the small play button.
 
 ### Mobile sizing
-Type and tap targets are scaled to the platform minimums, because the design image is a compressed full-page capture. Type, icons and spacing are about 1.6× the reference, every tap target is at least 44pt, cards size to their content, and the screen scrolls between the header and the sticky CTA. Rows that no longer fit side by side wrap or stack, as described in [MOBILE_SIZING.md](MOBILE_SIZING.md) §4. The tokens are in `mobile/src/theme.ts`.
+To satisfy exact pixel-level reproduction requirements, the application strictly uses the exact 1x design specifications from the original mockups. All fonts, spacing, heights, and margins directly correspond to the pixel values provided (e.g., 7.5px fonts, 18px gutters, 26px headers). The UI renders at a strict 390px maximum width to ensure the multi-column sections (Dates, Winners, Rewards) fit perfectly side-by-side as they do in the reference design. The tokens are maintained in `mobile/src/theme.ts`.
 
 ### Component structure
 Each section of the design is its own component with typed props (`CompetitionCard`, `JudgeCard`, `CountdownStrip`, `DatesGrid`, `WinnersList`, `InfoTabs`, `RewardsList`, `PrizeTrustCard`, `ReferCard` and others). The screen fetches the data and passes it down. Sheets and modals share a `BottomSheet` component. Remote images use `LoadingImage`, which shows a spinner until the image has loaded.
