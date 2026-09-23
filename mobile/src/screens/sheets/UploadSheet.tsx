@@ -27,7 +27,7 @@ export function UploadSheet({ visible, onClose, onPickFile, onSubmit, fileName, 
       <Text style={styles.subtitle}>{submissionWindow}</Text>
 
       <TouchableOpacity style={styles.picker} onPress={onPickFile} disabled={uploading}>
-        <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+        <Svg width={16} height={16} viewBox="0 0 24 24" fill="none">
           <Path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke={colors.primary} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
         </Svg>
         <Text style={styles.pickerLabel}>{fileName || t.tapToSelect}</Text>
@@ -57,17 +57,17 @@ export function UploadSheet({ visible, onClose, onPickFile, onSubmit, fileName, 
 
 const styles = StyleSheet.create({
   title: {
-    ...font.title,
+    ...font.name, fontSize: 10,
     color: colors.textDark,
     marginBottom: space.xs,
   },
   subtitle: {
     ...font.caption,
     color: colors.textMuted,
-    marginBottom: space.xl,
+    marginBottom: space.lg,
   },
   picker: {
-    height: 140,
+    height: 86,
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: colors.primary,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(255,107,0,0.05)', // or tintBg if it matches primary better
-    marginBottom: space.xl,
+    marginBottom: space.lg,
   },
   pickerLabel: {
     ...font.bodyStrong,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border,
     borderRadius: radius.pill,
     overflow: 'hidden',
-    marginBottom: space.xl,
+    marginBottom: space.lg,
   },
   progressBar: {
     height: '100%',
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   },
   submitBtn: {
     backgroundColor: colors.primary,
-    height: 52,
+    height: 30,
     borderRadius: radius.md,
     alignItems: 'center',
     justifyContent: 'center',
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   cancelBtn: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 52,
+    height: 30,
   },
   cancelBtnText: {
     ...font.button,

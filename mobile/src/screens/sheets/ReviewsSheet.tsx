@@ -66,17 +66,17 @@ export function ReviewsSheet({ visible, onClose }: ReviewsSheetProps) {
 
 const styles = StyleSheet.create({
   title: {
-    ...font.title,
+    ...font.name, fontSize: 10,
     color: colors.textDark,
     marginBottom: space.xs,
   },
   subtitle: {
     ...font.caption,
     color: colors.textMuted,
-    marginBottom: space.xl,
+    marginBottom: space.lg,
   },
   card: {
-    padding: space.lg,
+    padding: space.md,
     backgroundColor: colors.winnerCardBg,
     borderRadius: radius.md,
     marginBottom: space.md,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     gap: space.md,
   },
   retryBtn: {
-    minHeight: 44,
+    minHeight: 18,
     paddingHorizontal: space.xl,
     borderRadius: radius.md,
     backgroundColor: colors.primary,
@@ -133,10 +133,10 @@ const styles = StyleSheet.create({
     color: colors.white,
   },
   closeBtn: {
-    marginTop: space.xl,
+    marginTop: space.lg,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 52,
+    height: 30,
   },
   closeBtnText: {
     ...font.button,

@@ -233,7 +233,7 @@ export function PaymentSheet({ visible, onClose, competition, spotsLeft, payerNa
         <View>
           <View style={styles.center}>
             <View style={[styles.statusCircle, { backgroundColor: colors.badgeBg }]}>
-              <Svg width={36} height={36} viewBox="0 0 24 24">
+              <Svg width={22} height={22} viewBox="0 0 24 24">
                 <Path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke={colors.primary} strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" />
               </Svg>
             </View>
@@ -254,7 +254,7 @@ export function PaymentSheet({ visible, onClose, competition, spotsLeft, payerNa
         <View>
           <View style={styles.center}>
             <View style={[styles.statusCircle, { backgroundColor: colors.dangerBg }]}>
-              <Svg width={32} height={32} viewBox="0 0 24 24">
+              <Svg width={20} height={20} viewBox="0 0 24 24">
                 <Path d="M7 7l10 10M17 7L7 17" fill="none" stroke="#D64545" strokeWidth={2.4} strokeLinecap="round" />
               </Svg>
             </View>
@@ -340,7 +340,7 @@ function MethodIcon({ method }: { method: PayMethod }) {
   const c = colors.primary;
   return (
     <View style={styles.methodIcon}>
-      <Svg width={20} height={20} viewBox="0 0 20 20">
+      <Svg width={14} height={14} viewBox="0 0 20 20">
         {method === 'upi' && <Path d="M8 2l-4 16M12 2l4 8-4 8" fill="none" stroke={c} strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" />}
         {method === 'card' && (
           <>
@@ -361,51 +361,51 @@ function MethodIcon({ method }: { method: PayMethod }) {
 }
 
 const styles = StyleSheet.create({
-  title: { ...font.title, color: colors.textDark, marginBottom: space.xs },
-  subtitle: { ...font.body, color: colors.textMuted, marginBottom: space.xl },
-  box: { borderRadius: radius.sm, borderWidth: 1, borderColor: colors.border, padding: space.lg, marginBottom: space.lg },
-  row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', minHeight: 28, gap: space.md },
+  title: { ...font.name, fontSize: 10, color: colors.textDark, marginBottom: space.xs },
+  subtitle: { ...font.body, color: colors.textMuted, marginBottom: space.lg },
+  box: { borderRadius: radius.sm, borderWidth: 1, borderColor: colors.border, padding: space.md, marginBottom: space.lg },
+  row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', minHeight: 18, gap: space.md },
   label: { ...font.body, color: colors.textSecondary },
   value: { ...font.bodyStrong, color: colors.textDark, flexShrink: 1, textAlign: 'right' },
   strong: { fontFamily: font.title.fontFamily, color: colors.textDark },
   divider: { height: 1, backgroundColor: colors.border, marginVertical: space.sm },
   trustRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginVertical: space.md },
   trustText: { ...font.label, color: colors.textMuted },
-  payBtn: { backgroundColor: colors.primary, height: 52, borderRadius: radius.md, alignItems: 'center', justifyContent: 'center', marginTop: space.sm },
+  payBtn: { backgroundColor: colors.primary, height: 30, borderRadius: radius.md, alignItems: 'center', justifyContent: 'center', marginTop: space.sm },
   payBtnText: { ...font.button, color: colors.white },
-  cancelBtn: { alignItems: 'center', justifyContent: 'center', height: 52 },
+  cancelBtn: { alignItems: 'center', justifyContent: 'center', height: 30 },
   cancelBtnText: { ...font.button, color: colors.textMuted },
 
   checkoutHead: { flexDirection: 'row', alignItems: 'center', paddingBottom: space.md, marginBottom: space.md, borderBottomWidth: 1, borderBottomColor: colors.border },
-  backBtn: { width: 44, height: 44, justifyContent: 'center', marginLeft: -space.sm, paddingLeft: space.sm },
+  backBtn: { width: 30, height: 30, justifyContent: 'center', marginLeft: -space.sm, paddingLeft: space.sm },
   merchant: { ...font.name, color: colors.textDark },
   merchantSub: { ...font.label, color: colors.textMuted },
   headAmount: { ...font.amountLg, color: colors.textDark },
   sectionLabel: { ...font.label, color: colors.textMuted, marginBottom: space.sm, textTransform: 'uppercase', letterSpacing: 0.5 },
 
-  methodRow: { flexDirection: 'row', alignItems: 'center', minHeight: 60, paddingHorizontal: space.md, borderWidth: 1, borderColor: colors.border, borderRadius: radius.md, marginBottom: space.sm },
+  methodRow: { flexDirection: 'row', alignItems: 'center', minHeight: 36, paddingHorizontal: space.md, borderWidth: 1, borderColor: colors.border, borderRadius: radius.md, marginBottom: space.sm },
   methodRowActive: { borderColor: colors.primary, backgroundColor: colors.tintBg },
-  methodIcon: { width: 36, height: 36, borderRadius: radius.sm, backgroundColor: colors.white, borderWidth: 1, borderColor: colors.border, alignItems: 'center', justifyContent: 'center' },
+  methodIcon: { width: 22, height: 22, borderRadius: radius.sm, backgroundColor: colors.white, borderWidth: 1, borderColor: colors.border, alignItems: 'center', justifyContent: 'center' },
   methodLabel: { ...font.bodyStrong, color: colors.textDark },
   methodSub: { ...font.caption, color: colors.textMuted },
-  radio: { width: 20, height: 20, borderRadius: 10, borderWidth: 2, borderColor: colors.dashedBorder, alignItems: 'center', justifyContent: 'center' },
+  radio: { width: 12, height: 12, borderRadius: 6, borderWidth: 2, borderColor: colors.dashedBorder, alignItems: 'center', justifyContent: 'center' },
   radioActive: { borderColor: colors.primary },
-  radioDot: { width: 10, height: 10, borderRadius: 5, backgroundColor: colors.primary },
+  radioDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: colors.primary },
 
   form: { marginTop: space.sm, marginBottom: space.sm },
   field: { marginBottom: space.md },
   fieldRow: { flexDirection: 'row', gap: space.md },
   fieldLabel: { ...font.label, color: colors.textSecondary, marginBottom: space.xs },
-  input: { height: 48, borderWidth: 1, borderColor: colors.copyBorder, borderRadius: radius.sm, paddingHorizontal: space.md, ...font.body, color: colors.textDark, paddingVertical: 0 },
+  input: { height: 30, borderWidth: 1, borderColor: colors.copyBorder, borderRadius: radius.sm, paddingHorizontal: space.md, ...font.body, color: colors.textDark, paddingVertical: 0 },
   error: { ...font.caption, color: colors.danger, marginTop: space.xs },
   hint: { ...font.caption, color: colors.textMuted },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: space.sm },
-  chip: { minHeight: 44, paddingHorizontal: space.lg, borderRadius: radius.sm, borderWidth: 1, borderColor: colors.border, justifyContent: 'center' },
+  chip: { minHeight: 18, paddingHorizontal: space.lg, borderRadius: radius.sm, borderWidth: 1, borderColor: colors.border, justifyContent: 'center' },
   chipActive: { borderColor: colors.primary, backgroundColor: colors.tintBg },
   chipText: { ...font.bodyStrong, color: colors.textSecondary },
   chipTextActive: { color: colors.primary },
 
   center: { alignItems: 'center', paddingVertical: space.lg },
   centerText: { textAlign: 'center' },
-  statusCircle: { width: 72, height: 72, borderRadius: 36, alignItems: 'center', justifyContent: 'center', marginBottom: space.lg },
+  statusCircle: { width: 30, height: 30, borderRadius: 22, alignItems: 'center', justifyContent: 'center', marginBottom: space.lg },
 });

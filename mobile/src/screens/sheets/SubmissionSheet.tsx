@@ -31,7 +31,7 @@ export function SubmissionSheet({ visible, onClose, submission, loading, resultA
       <Text style={styles.title}>{t.yourSubmission}</Text>
 
       {loading ? (
-        <ActivityIndicator size="large" color={colors.primary} style={{ marginVertical: space.xl }} />
+        <ActivityIndicator size="large" color={colors.primary} style={{ marginVertical: space.lg }} />
       ) : (
         <TouchableOpacity
           style={styles.card}
@@ -64,21 +64,21 @@ export function SubmissionSheet({ visible, onClose, submission, loading, resultA
 
 const styles = StyleSheet.create({
   title: {
-    ...font.title,
+    ...font.name, fontSize: 10,
     color: colors.textDark,
-    marginBottom: space.xl,
+    marginBottom: space.lg,
   },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.winnerCardBg,
-    padding: space.lg,
+    padding: space.md,
     borderRadius: radius.md,
-    marginBottom: space.xl,
+    marginBottom: space.lg,
   },
   iconCircle: {
     width: 48,
-    height: 48,
+    height: 30,
     borderRadius: 24,
     backgroundColor: colors.primary,
     alignItems: 'center',
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   doneBtn: {
     backgroundColor: colors.primary,
-    height: 52,
+    height: 30,
     borderRadius: radius.md,
     alignItems: 'center',
     justifyContent: 'center',
