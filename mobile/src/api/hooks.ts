@@ -34,8 +34,8 @@ export function useConfirmPayment() {
 
 export function useSubmitEntry() {
   const qc = useQueryClient();
-  return useMutation<Submission, any, { competitionId: string; fileUri: string; fileName: string; mimeType?: string }>({
-    mutationFn: ({ competitionId, fileUri, fileName, mimeType }) => submitEntry(competitionId, fileUri, fileName, mimeType),
+  return useMutation<Submission, any, { competitionId: string; fileUri: string; fileName: string; mimeType?: string; webFile?: any }>({
+    mutationFn: ({ competitionId, fileUri, fileName, mimeType, webFile }) => submitEntry(competitionId, fileUri, fileName, mimeType, webFile),
     onSuccess: () => { qc.invalidateQueries({ queryKey: ['competition'] }); },
   });
 }

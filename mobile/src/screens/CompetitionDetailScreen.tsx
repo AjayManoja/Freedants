@@ -66,6 +66,7 @@ export function CompetitionDetailScreen({ slug }: CompetitionDetailScreenProps) 
   const [fileName, setFileName] = useState<string | null>(null);
   const [fileUri, setFileUri] = useState<string | null>(null);
   const [fileMime, setFileMime] = useState<string | undefined>(undefined);
+  const [webFile, setWebFile] = useState<any>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [copied, setCopied] = useState(false);
@@ -195,6 +196,12 @@ export function CompetitionDetailScreen({ slug }: CompetitionDetailScreenProps) 
       setFileName(file.name);
       setFileUri(file.uri);
       setFileMime(file.mimeType);
+      
+      if (Platform.OS === 'web' && (file as any).file) {
+        setWebFile((file as any).file);
+      } else {
+        setWebFile(null);
+      }
     } catch {
       showToast(t.pickerFailed);
     }
@@ -213,7 +220,7 @@ export function CompetitionDetailScreen({ slug }: CompetitionDetailScreenProps) 
     }, 150);
 
     try {
-      await submitMutation.mutateAsync({ competitionId: comp._id, fileUri, fileName, mimeType: fileMime });
+      await submitMutation.mutateAsync({ competitionId: comp._id, fileUri, fileName, mimeType: fileMime, webFile });
       clearInterval(interval);
       setUploadProgress(100);
       setTimeout(() => {

@@ -106,11 +106,13 @@ export async function confirmPayment(registrationId: string, success = true, pay
   });
 }
 
-export async function submitEntry(competitionId: string, fileUri: string, fileName: string, mimeType = 'video/mp4'): Promise<Submission> {
+export async function submitEntry(competitionId: string, fileUri: string, fileName: string, mimeType = 'video/mp4', webFile?: any): Promise<Submission> {
   const baseUrl = activeBaseUrl || CANDIDATE_URLS[0];
   const formData = new FormData();
   
-  if (Platform.OS === 'web') {
+  if (Platform.OS === 'web' && webFile) {
+    formData.append('file', webFile, fileName);
+  } else if (Platform.OS === 'web') {
     // On Web, passing {uri, name, type} stringifies it. We must fetch the blob and append it directly.
     const res = await fetch(fileUri);
     const blob = await res.blob();
