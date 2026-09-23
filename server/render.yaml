@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: feedants-competition
+    env: node
+    buildCommand: "cd ../mobile && npm install && npx expo export -p web && cd ../server && npm install && npm run build"
+    startCommand: "npm run demo"
+    envVars:
+      - key: DEMO_MODE
+        value: "true"
+      # The frontend will hit the same origin since it's served by the backend
+      - key: EXPO_PUBLIC_API_URL
+        value: "/api"

@@ -26,6 +26,14 @@ if (config.demoMode) {
   app.use('/api/demo', demoRouter);
 }
 
+// Serve the frontend static files (Expo web build)
+app.use(express.static(path.join(__dirname, '../../mobile/dist')));
+
+// Fallback all other routes to index.html for React Navigation
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../mobile/dist/index.html'));
+});
+
 app.use(errorHandler);
 
 export default app;
