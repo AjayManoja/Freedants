@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { colors, font, space, radius } from '../theme';
+import { colors, font, space, radius, fontFamilies } from '../theme';
 import Svg, { Path, Circle } from 'react-native-svg';
 import { useLocale } from '../i18n/LocaleContext';
-
 
 export interface DisclaimerStripProps {
   text: string;
@@ -13,7 +12,7 @@ export function DisclaimerStrip({ text }: DisclaimerStripProps) {
   const { t } = useLocale();
   return (
     <View style={styles.container}>
-      <Svg width={16} height={16} viewBox="0 0 9 9" style={styles.icon}>
+      <Svg width={9} height={9} viewBox="0 0 9 9">
         <Circle cx={4.5} cy={4.5} r={3.9} fill="none" stroke={colors.primary} strokeWidth={0.9} />
         <Path d="M4.5 4v2.3" stroke={colors.primary} strokeWidth={0.9} strokeLinecap="round" />
         <Circle cx={4.5} cy={2.7} r={0.5} fill={colors.primary} />
@@ -27,10 +26,27 @@ export function DisclaimerStrip({ text }: DisclaimerStripProps) {
 }
 
 const styles = StyleSheet.create({
-  container: { flexDirection: 'row', alignItems: 'flex-start', backgroundColor: colors.tintBg, borderRadius: radius.sm, paddingHorizontal: space.md, paddingVertical: space.md },
-  icon: { marginRight: space.sm, marginTop: 2 },
-  textContainer: { flex: 1 },
-  prefix: { ...font.bodyStrong, color: colors.primary },
-  text: { ...font.body, color: colors.textPrimary }
+  container: {
+    height: 18,
+    borderRadius: 5,
+    backgroundColor: colors.tintBg,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 11,
+    gap: 7,
+  },
+  textContainer: {
+    flex: 1,
+  },
+  prefix: {
+    fontFamily: fontFamilies.bold,
+    fontSize: 6,
+    fontWeight: '700',
+    color: colors.primary,
+  },
+  text: {
+    fontFamily: fontFamilies.regular,
+    fontSize: 6,
+    color: colors.textPrimary,
+  },
 });
-

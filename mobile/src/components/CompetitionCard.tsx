@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { font, space, radius, icon, colors, cardStyle, useLayout } from '../theme';
+import { font, space, radius, icon, colors, cardStyle, fontFamilies } from '../theme';
 import Svg, { Path, Circle } from 'react-native-svg';
 import { RegistrationStatus } from '../api/types';
 import { useLocale } from '../i18n/LocaleContext';
@@ -21,33 +21,10 @@ export interface CompetitionCardProps {
 
 export function CompetitionCard({ title, tags, perks, prizePool, entryFee, capacity, bookedCount, currency, status }: CompetitionCardProps) {
   const { t } = useLocale();
-  const { isWide } = useLayout();
   const spotsLeft = Math.max(0, capacity - bookedCount);
   const showBadge = status === 'registered' || status === 'submitted';
   const badgeLabel = status === 'submitted' ? t.submitted : t.registered;
   const barFillRatio = capacity > 0 ? Math.min(1, bookedCount / capacity) : 0;
-
-  const spotsLabel = (
-    <View style={styles.spotsLeftGroup}>
-      <Svg width={icon.sm} height={icon.sm} viewBox="0 0 12 10">
-        <Circle cx={4} cy={3} r={2} fill="none" stroke={colors.primary} strokeWidth={1.5} />
-        <Path d="M0.6 9.4a3.4 3.4 0 0 1 6.8 0" fill="none" stroke={colors.primary} strokeWidth={1.5} />
-        <Circle cx={8.3} cy={3} r={1.7} fill="none" stroke={colors.primary} strokeWidth={1.5} />
-        <Path d="M8.6 6a3 3 0 0 1 2.8 3.4" fill="none" stroke={colors.primary} strokeWidth={1.5} />
-      </Svg>
-      <Text style={styles.spotsText} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.85} maxFontSizeMultiplier={1.3}>
-        {fmt(t.onlySpotsLeft, { n: spotsLeft })}
-      </Text>
-    </View>
-  );
-  const bookedLabel = (
-    <Text style={styles.bookedText} maxFontSizeMultiplier={1.3}>{fmt(t.booked, { booked: bookedCount, capacity })}</Text>
-  );
-  const progress = (
-    <View style={styles.progressTrack} accessibilityRole="progressbar" accessibilityValue={{ min: 0, max: capacity, now: bookedCount }}>
-      <View style={[styles.progressFill, { width: `${barFillRatio * 100}%` }]} />
-    </View>
-  );
 
   return (
     <View style={styles.card}>
@@ -55,7 +32,7 @@ export function CompetitionCard({ title, tags, perks, prizePool, entryFee, capac
         <Text style={styles.title}>{title}</Text>
         {showBadge && (
           <View style={styles.badge}>
-            <Svg width={icon.xs} height={icon.xs} viewBox="0 0 10 10">
+            <Svg width={10} height={10} viewBox="0 0 10 10">
               <Circle cx={5} cy={5} r={5} fill={colors.primary} />
               <Path d="M2.9 5.1l1.4 1.4 2.8-2.9" fill="none" stroke="#fff" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round" />
             </Svg>
@@ -72,8 +49,8 @@ export function CompetitionCard({ title, tags, perks, prizePool, entryFee, capac
         ))}
         {perks.length > 0 && (
           <View style={styles.perkRow}>
-            <Svg width={icon.xs} height={icon.xs} viewBox="0 0 8 10">
-              <Path d="M1.5 1h5v2.2a2.5 2.5 0 0 1-5 0zM4 5.7v1.8M2.3 9h3.4M2.8 7.5h2.4v1.5H2.8z" fill="none" stroke={colors.primary} strokeWidth={1.5} strokeLinejoin="round" />
+            <Svg width={8} height={10} viewBox="0 0 8 10">
+              <Path d="M1.5 1h5v2.2a2.5 2.5 0 0 1-5 0zM4 5.7v1.8M2.3 9h3.4M2.8 7.5h2.4v1.5H2.8z" fill="none" stroke={colors.primary} strokeWidth={1} strokeLinejoin="round" />
             </Svg>
             <Text style={styles.perkText}>{perks[0]}</Text>
           </View>
@@ -81,35 +58,34 @@ export function CompetitionCard({ title, tags, perks, prizePool, entryFee, capac
       </View>
 
       <View style={styles.columns}>
-        <View style={isWide ? styles.columnAuto : styles.column}>
+        <View style={styles.prizeCol}>
           <Text style={styles.colLabel}>{t.prizePool}</Text>
           <Text style={styles.prizeVal} numberOfLines={1}>{formatMoney(prizePool, currency)}</Text>
         </View>
-        <View style={isWide ? styles.columnAuto : styles.column}>
+        <View style={styles.feeCol}>
           <Text style={styles.colLabel}>{t.entryFee}</Text>
           <Text style={styles.feeVal} numberOfLines={1}>{formatMoney(entryFee, currency)}</Text>
         </View>
-
-        {/* Wide screens: spots as a third column, as in the design */}
-        {isWide && (
-          <View style={styles.spotsColumn}>
-            {spotsLabel}
-            {progress}
-            {bookedLabel}
+        <View style={styles.spotsCol}>
+          <View style={styles.spotsLeftGroup}>
+            <Svg width={10} height={9} viewBox="0 0 12 10">
+              <Circle cx={4} cy={3} r={2} fill="none" stroke={colors.primary} strokeWidth={1} />
+              <Path d="M0.6 9.4a3.4 3.4 0 0 1 6.8 0" fill="none" stroke={colors.primary} strokeWidth={1} />
+              <Circle cx={8.3} cy={3} r={1.7} fill="none" stroke={colors.primary} strokeWidth={1} />
+              <Path d="M8.6 6a3 3 0 0 1 2.8 3.4" fill="none" stroke={colors.primary} strokeWidth={1} />
+            </Svg>
+            <Text style={styles.spotsText} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.85} maxFontSizeMultiplier={1.3}>
+              {fmt(t.onlySpotsLeft, { n: spotsLeft })}
+            </Text>
           </View>
-        )}
-      </View>
-
-      {/* Regular screens: spots block runs full width (MOBILE_SIZING §4.1) */}
-      {!isWide && (
-        <View style={styles.spotsBlock}>
-          <View style={styles.spotsRow}>
-            {spotsLabel}
-            {bookedLabel}
+          <View style={styles.progressTrack} accessibilityRole="progressbar" accessibilityValue={{ min: 0, max: capacity, now: bookedCount }}>
+            <View style={[styles.progressFill, { width: `${barFillRatio * 100}%` }]} />
           </View>
-          {progress}
+          <Text style={styles.bookedText} maxFontSizeMultiplier={1.3}>
+            {fmt(t.booked, { booked: bookedCount, capacity })}
+          </Text>
         </View>
-      )}
+      </View>
     </View>
   );
 }
@@ -117,126 +93,132 @@ export function CompetitionCard({ title, tags, perks, prizePool, entryFee, capac
 const styles = StyleSheet.create({
   card: {
     ...cardStyle,
+    paddingTop: 7,
+    paddingRight: 11,
+    paddingBottom: 0,
+    paddingLeft: 12,
+    borderRadius: 8,
   },
   titleRow: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: space.sm,
+    gap: 4,
   },
   title: {
     ...font.title,
     color: colors.textPrimary,
+    letterSpacing: -0.1,
     flexShrink: 1,
   },
   badge: {
-    height: 28,
+    height: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
-    paddingHorizontal: 10,
+    gap: 4,
+    paddingTop: 0,
+    paddingRight: 6,
+    paddingBottom: 0,
+    paddingLeft: 5,
     backgroundColor: colors.badgeBg,
-    borderRadius: radius.sm,
+    borderRadius: 4,
   },
   badgeText: {
-    ...font.label,
-    fontFamily: font.bodyStrong.fontFamily,
+    fontFamily: fontFamilies.semiBold,
+    fontSize: 7,
+    fontWeight: '600',
     color: colors.primary,
   },
   tagsRow: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     alignItems: 'center',
-    gap: space.sm,
-    marginTop: space.sm,
+    gap: 5,
+    marginTop: 5,
   },
   chip: {
     backgroundColor: colors.chipBg,
-    borderRadius: radius.sm,
-    paddingHorizontal: 10,
-    height: 26,
+    borderRadius: 4,
+    paddingVertical: 2,
+    paddingHorizontal: 6,
     justifyContent: 'center',
   },
   chipText: {
-    ...font.label,
+    fontFamily: fontFamilies.medium,
+    fontSize: 6,
+    fontWeight: '500',
     color: colors.textPrimary,
+    lineHeight: 9,
   },
   perkRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: space.xs,
-    marginLeft: space.xs,
+    gap: 3,
+    marginLeft: 3,
   },
   perkText: {
-    ...font.label,
+    fontFamily: fontFamilies.medium,
+    fontSize: 7.5,
+    fontWeight: '500',
     color: colors.primary,
   },
   columns: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginTop: space.lg,
-    gap: space.md,
+    marginTop: 6,
   },
-  column: {
-    flex: 1,
+  prizeCol: {
+    width: 104,
   },
-  columnAuto: {
-    flexShrink: 0,
+  feeCol: {
+    width: 110,
+  },
+  spotsCol: {
+    width: 116,
+    marginTop: -3,
   },
   colLabel: {
-    ...font.label,
+    fontFamily: fontFamilies.regular,
+    fontSize: 6.5,
     color: colors.textMuted,
+    lineHeight: 9,
   },
   prizeVal: {
     ...font.display,
     color: colors.primary,
+    letterSpacing: -0.2,
   },
   feeVal: {
     ...font.amountLg,
-    color: colors.textPrimary,
-  },
-  spotsColumn: {
-    flex: 1,
-    minWidth: 0,
-    paddingTop: 2,
-    gap: space.xs,
-  },
-  spotsBlock: {
-    marginTop: space.lg,
-  },
-  spotsRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: space.sm,
+    color: colors.navy,
   },
   spotsLeftGroup: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: space.sm,
-    flexShrink: 1,
+    gap: 5,
   },
   spotsText: {
-    ...font.bodyStrong,
+    fontFamily: fontFamilies.semiBold,
+    fontSize: 8,
+    fontWeight: '600',
     color: colors.primary,
-    flexShrink: 1,
-  },
-  bookedText: {
-    ...font.label,
-    color: colors.textMuted,
   },
   progressTrack: {
-    height: 6,
+    height: 3,
     backgroundColor: colors.progressTrack,
-    borderRadius: 3,
-    marginTop: space.sm,
+    borderRadius: 2,
+    marginTop: 5,
     width: '100%',
     overflow: 'hidden',
   },
   progressFill: {
-    height: 6,
-    borderRadius: 3,
+    height: 3,
+    borderRadius: 2,
     backgroundColor: colors.primary,
+  },
+  bookedText: {
+    fontFamily: fontFamilies.regular,
+    fontSize: 6.5,
+    color: colors.textMuted,
+    marginTop: 3,
   },
 });

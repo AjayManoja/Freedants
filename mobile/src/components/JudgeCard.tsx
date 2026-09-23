@@ -39,7 +39,7 @@ export function JudgeCard({ judge, onPlayIntro }: JudgeCardProps) {
       </View>
       <View style={styles.action}>
         <View style={styles.playBtn}>
-          <Svg width={16} height={16} viewBox="0 0 10 10">
+          <Svg width={9} height={10} viewBox="0 0 9 10">
             <Path d="M1 0.8v8.4L8.2 5z" fill={colors.primary} />
           </Svg>
         </View>
@@ -52,18 +52,26 @@ export function JudgeCard({ judge, onPlayIntro }: JudgeCardProps) {
 const styles = StyleSheet.create({
   card: {
     ...cardStyle,
+    height: 58,
+    marginTop: 4,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: colors.border,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: space.lg,
+    padding: 0,
+    paddingLeft: 17,
+    position: 'relative',
   },
   avatar: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
+    width: 43,
+    height: 43,
+    borderRadius: 21.5,
+    backgroundColor: '#EDEFF2',
   },
   info: {
-    flex: 1,
-    marginLeft: space.md,
+    marginLeft: 16,
+    justifyContent: 'center',
   },
   judgeLabel: {
     ...font.label,
@@ -82,21 +90,24 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
   },
   action: {
+    position: 'absolute',
+    right: 30,
+    top: 9,
     alignItems: 'center',
-    marginLeft: space.md,
+    gap: 3,
   },
   playBtn: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
     backgroundColor: colors.playBg,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 3,
   },
   playText: {
-    ...font.caption,
-    color: colors.textPrimary,
-    marginTop: space.sm,
+    fontFamily: font.body.fontFamily,
+    fontSize: 6.5,
+    lineHeight: 9,
+    color: colors.textMuted,
   },
 });

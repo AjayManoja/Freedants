@@ -4,7 +4,6 @@ import { font, space, radius, colors, icon } from '../theme';
 import Svg, { Path, Circle } from 'react-native-svg';
 import { useLocale } from '../i18n/LocaleContext';
 
-
 export interface CountdownStripProps {
   targetDate: string;
   serverTimeOffset: number;
@@ -40,76 +39,84 @@ export function CountdownStrip({ targetDate, serverTimeOffset, onExpire }: Count
 
   return (
     <View style={styles.container}>
-      <View style={styles.leftCol}>
-        <View style={styles.labelRow}>
-          <Svg width={icon.sm} height={icon.sm} viewBox="0 0 12 12" style={styles.hourglass}>
-            <Path d="M0.5 0.7h7M0.5 11.3h7M1.3 0.7c0 3 5.4 3 5.4 5.3S1.3 8.3 1.3 11.3M6.7 0.7c0 3-5.4 3-5.4 5.3s5.4 2.3 5.4 5.3" fill="none" stroke={colors.primary} strokeWidth={1.1} strokeLinecap="round" />
-          </Svg>
-          <Text style={styles.label} maxFontSizeMultiplier={1.3}>{t.closesIn}</Text>
-        </View>
-        <Text style={styles.timerText} maxFontSizeMultiplier={1.3}>{formatRemaining(target - now)}</Text>
-      </View>
-
-      <View style={styles.rightCol}>
-        <View style={styles.hurryChip}>
-          <Svg width={icon.sm} height={icon.sm} viewBox="0 0 12 12" style={styles.stopwatch}>
-            <Circle cx={5.5} cy={6.8} r={4.4} fill="none" stroke={colors.primary} strokeWidth={1.1} />
-            <Path d="M5.5 4.5v2.4M4 0.8h3M5.5 0.8v1.6M9.2 2.8l0.9-0.9" fill="none" stroke={colors.primary} strokeWidth={1.1} strokeLinecap="round" />
-          </Svg>
-          <Text style={styles.hurry} maxFontSizeMultiplier={1.3}>{t.hurry}</Text>
-        </View>
-      </View>
+      <Svg width={8} height={12} viewBox="0 0 8 12" style={styles.hourglass}>
+        <Path
+          d="M0.5 0.7h7M0.5 11.3h7M1.3 0.7c0 3 5.4 3 5.4 5.3S1.3 8.3 1.3 11.3M6.7 0.7c0 3-5.4 3-5.4 5.3s5.4 2.3 5.4 5.3"
+          fill="none"
+          stroke={colors.primary}
+          strokeWidth={1.1}
+          strokeLinecap="round"
+        />
+      </Svg>
+      <Text style={styles.label} maxFontSizeMultiplier={1.3}>
+        {t.closesIn}
+      </Text>
+      <Text style={styles.timerText} maxFontSizeMultiplier={1.3}>
+        {formatRemaining(target - now)}
+      </Text>
+      <Svg width={11} height={12} viewBox="0 0 11 12" style={styles.stopwatch}>
+        <Circle cx={5.5} cy={6.8} r={4.4} fill="none" stroke={colors.primary} strokeWidth={1.1} />
+        <Path
+          d="M5.5 4.5v2.4M4 0.8h3M5.5 0.8v1.6M9.2 2.8l0.9-0.9"
+          fill="none"
+          stroke={colors.primary}
+          strokeWidth={1.1}
+          strokeLinecap="round"
+        />
+      </Svg>
+      <Text style={styles.hurry} maxFontSizeMultiplier={1.3}>
+        {t.hurry}
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    height: 24,
+    marginTop: 5,
+    borderRadius: 6,
     backgroundColor: colors.tintBg,
-    borderRadius: radius.md,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  leftCol: {
-    flex: 1,
-  },
-  labelRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: space.xs,
+    position: 'relative',
   },
   hourglass: {
-    marginRight: space.xs,
+    position: 'absolute',
+    left: 20,
+    top: 6,
   },
   label: {
-    ...font.bodyStrong,
+    position: 'absolute',
+    left: 43,
+    top: 0,
+    lineHeight: 24,
+    fontSize: 7,
+    fontFamily: font.bodyStrong.fontFamily,
+    fontWeight: '600',
     color: colors.textPrimary,
   },
   timerText: {
-    ...font.timer,
+    position: 'absolute',
+    left: 142,
+    top: 0,
+    lineHeight: 24,
+    fontSize: 10,
+    fontFamily: font.timer.fontFamily,
+    fontWeight: '700',
     color: colors.primary,
-  },
-  rightCol: {
-    marginLeft: space.sm,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-  },
-  hurryChip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.badgeBg,
-    paddingHorizontal: 10,
-    height: 32,
-    borderRadius: radius.sm,
   },
   stopwatch: {
-    marginRight: space.xs,
+    position: 'absolute',
+    left: 289,
+    top: 5,
   },
   hurry: {
-    ...font.bodyStrong,
+    position: 'absolute',
+    left: 309,
+    top: 0,
+    lineHeight: 24,
+    fontSize: 7,
+    fontFamily: font.bodyStrong.fontFamily,
+    fontWeight: '600',
     color: colors.primary,
-  }
+  },
 });

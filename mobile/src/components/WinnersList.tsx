@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native
 import { LoadingImage } from './LoadingImage';
 import { useLocale } from '../i18n/LocaleContext';
 
-import { font, space, radius, colors } from '../theme';
+import { font, space, radius, colors, cardStyle, fontFamilies } from '../theme';
 import { resolveAssetUrl } from '../api/client';
 import Svg, { Path } from 'react-native-svg';
 
@@ -23,10 +23,12 @@ export interface WinnersListProps {
   onPlayVideo: (name: string, position: string, videoUrl?: string | null) => void;
 }
 
-const TILE_WIDTH = 180;
+const TILE_WIDTH = 85;
+const GAP = 8;
 
 export function WinnersList({ winners, onPlayVideo }: WinnersListProps) {
   const { t } = useLocale();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{t.previousWinners}</Text>
@@ -35,12 +37,16 @@ export function WinnersList({ winners, onPlayVideo }: WinnersListProps) {
         showsHorizontalScrollIndicator={false}
         data={winners}
         keyExtractor={(w, index) => w._id || w.id || `${w.name}-${index}`}
-        snapToInterval={TILE_WIDTH + space.md}
+        snapToInterval={TILE_WIDTH + GAP}
         decelerationRate="fast"
+        style={styles.list}
         contentContainerStyle={styles.listContent}
-        renderItem={({ item }) => {
+        renderItem={({ item, index }) => {
           const imgUrl = resolveAssetUrl(item.thumbUrl || item.photoUrl);
           const subtitle = item.position || item.role || '';
+          const photoWidth = index === 0 ? 42 : 40;
+          const infoMarginLeft = index === 0 ? 6 : 7;
+
           return (
             // The whole tile plays the winner's video, not just the small badge
             <TouchableOpacity
@@ -50,15 +56,15 @@ export function WinnersList({ winners, onPlayVideo }: WinnersListProps) {
               accessibilityRole="button"
               accessibilityLabel={`Play video: ${item.name}, ${subtitle}`}
             >
-              <View style={styles.photoWrap}>
-                <LoadingImage uri={imgUrl} style={styles.photo} />
+              <View style={[styles.photoWrap, { width: photoWidth }]}>
+                <LoadingImage uri={imgUrl} style={[styles.photo, { width: photoWidth }]} />
                 <View style={styles.playBadge}>
-                  <Svg width={10} height={10} viewBox="0 0 6 6">
-                    <Path d="M1 0.5v5L5.5 3z" fill={colors.white} />
+                  <Svg width={5} height={6} viewBox="0 0 5 6">
+                    <Path d="M0.5 0.4v5.2L4.7 3z" fill={colors.white} />
                   </Svg>
                 </View>
               </View>
-              <View style={styles.info}>
+              <View style={[styles.info, { marginLeft: infoMarginLeft }]}>
                 <Text style={styles.name} numberOfLines={1}>{item.name}</Text>
                 <Text style={styles.role} numberOfLines={2}>{subtitle}</Text>
               </View>
@@ -71,59 +77,75 @@ export function WinnersList({ winners, onPlayVideo }: WinnersListProps) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    ...cardStyle,
+    height: 69,
+    marginTop: 5,
+    padding: 0,
+    paddingTop: 5,
+    paddingLeft: 8,
+    paddingRight: 0,
+    paddingBottom: 0,
+    overflow: 'hidden',
+  },
   title: {
-    ...font.section,
+    fontFamily: fontFamilies.bold,
+    fontSize: 7.5,
+    fontWeight: '700',
     color: colors.textPrimary,
-    marginBottom: space.md,
+    lineHeight: 12,
+  },
+  list: {
+    marginTop: 3,
   },
   listContent: {
-    paddingRight: space.lg,
+    gap: GAP,
+    paddingRight: 8,
   },
   tile: {
     width: TILE_WIDTH,
+    height: 42,
     backgroundColor: colors.winnerCardBg,
-    borderRadius: radius.md,
+    borderRadius: 5,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: space.sm,
-    marginRight: space.md,
+    overflow: 'hidden',
   },
   photoWrap: {
-    width: 72,
-    height: 72,
+    height: 42,
+    position: 'relative',
   },
   photo: {
-    width: 72,
-    height: 72,
-    borderRadius: 10,
+    height: 42,
+    borderRadius: 5,
   },
   playBadge: {
     position: 'absolute',
-    bottom: -4,
-    right: -4,
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    right: 3,
+    bottom: 2,
+    width: 14,
+    height: 14,
+    borderRadius: 7,
     backgroundColor: colors.primary,
-    borderWidth: 2,
+    borderWidth: 1.5,
     borderColor: colors.white,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 2,
   },
   info: {
     flex: 1,
-    marginLeft: space.sm,
   },
   name: {
-    ...font.caption,
-    fontFamily: 'Poppins_500Medium',
+    fontFamily: fontFamilies.medium,
+    fontSize: 5.5,
+    fontWeight: '500',
     color: colors.textPrimary,
+    lineHeight: 9,
   },
   role: {
-    ...font.caption,
+    fontFamily: fontFamilies.regular,
+    fontSize: 5.5,
     color: colors.winnerRole,
-    marginTop: 2,
-  }
+    lineHeight: 9,
+  },
 });

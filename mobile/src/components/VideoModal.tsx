@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
 import Svg, { Path } from 'react-native-svg';
-import { colors, font, radius, space, hitSlop, useLayout } from '../theme';
+import { colors, font, radius, space, hitSlop, MAX_CONTENT_WIDTH } from '../theme';
 import { useLocale } from '../i18n/LocaleContext';
 
 interface VideoModalProps {
@@ -16,7 +16,7 @@ interface VideoModalProps {
 
 export function VideoModal({ visible, title, url, headers, onClose }: VideoModalProps) {
   const { t } = useLocale();
-  const { contentWidth } = useLayout();
+  const contentWidth = MAX_CONTENT_WIDTH;
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
 

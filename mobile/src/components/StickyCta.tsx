@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { colors, font, radius } from '../theme';
+import { colors, font, radius, hitSlop, fontFamilies } from '../theme';
 
 export interface StickyCtaProps {
   title: string;
@@ -16,9 +16,13 @@ export function StickyCta({ title, sub, disabled, onPress, bgColor }: StickyCtaP
       style={[styles.btn, { backgroundColor: disabled ? colors.disabled : (bgColor || colors.primary) }]} 
       disabled={disabled}
       onPress={onPress}
+      hitSlop={hitSlop}
+      accessibilityRole="button"
+      accessibilityState={{ disabled: !!disabled }}
+      accessibilityLabel={`${title}. ${sub}`}
     >
-      <Text style={[font.button, styles.title]}>{title}</Text>
-      <Text style={[font.caption, styles.sub]}>{sub}</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.sub}>{sub}</Text>
     </TouchableOpacity>
   );
 }
@@ -26,11 +30,26 @@ export function StickyCta({ title, sub, disabled, onPress, bgColor }: StickyCtaP
 const styles = StyleSheet.create({
   btn: { 
     width: '100%', 
-    height: 56, 
-    borderRadius: radius.md, 
+    height: 24, 
+    borderRadius: 6, 
+    flexDirection: 'column',
     justifyContent: 'center', 
-    alignItems: 'center' 
+    alignItems: 'center',
+    padding: 0,
   },
-  title: { color: colors.white },
-  sub: { color: colors.white, opacity: 0.9 }
+  title: {
+    fontFamily: fontFamilies.semiBold,
+    fontSize: 8,
+    fontWeight: '600',
+    lineHeight: 11,
+    color: colors.white,
+  },
+  sub: {
+    fontFamily: fontFamilies.regular,
+    fontSize: 5.5,
+    fontWeight: '400',
+    lineHeight: 8,
+    color: colors.white,
+    opacity: 0.9,
+  },
 });

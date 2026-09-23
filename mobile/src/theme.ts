@@ -1,26 +1,10 @@
-import { useWindowDimensions, ViewStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 
-export const GUTTER = 16;
-
-// ── Responsive layout ─────────────────────────────────────
-// compact  < 360pt   small phones (iPhone SE 1st gen, small Androids): single-column fallbacks
-// regular  360–409pt most phones: stacked rows from MOBILE_SIZING.md §4
-// wide     ≥ 410pt   large phones (Pixel Pro, iPhone Plus/Pro Max): side-by-side rows as in the design
-// On tablets the content column is capped and centred.
-export const BREAKPOINTS = { compact: 360, wide: 410 } as const;
+// ── Design constants ──────────────────────────────────────
+// The original design is 390px wide with 18px side gutters.
+// All sizes below are the exact design px from Main.dc.html.
+export const GUTTER = 18;
 export const MAX_CONTENT_WIDTH = 560;
-
-export function useLayout() {
-  const { width } = useWindowDimensions();
-  const containerWidth = Math.min(width, MAX_CONTENT_WIDTH + 2 * GUTTER);
-  return {
-    width,
-    containerWidth,
-    contentWidth: containerWidth - 2 * GUTTER,
-    isCompact: width < BREAKPOINTS.compact,
-    isWide: width >= BREAKPOINTS.wide,
-  };
-}
 
 // ── Colours ──────────────────────────────────────────────
 export const colors = {
@@ -76,11 +60,11 @@ export const colors = {
   success: '#0B7B7D',
 };
 
-// ── Spacing & Layout Tokens ───────────────────────────────────────────
-export const space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24 };
-export const radius = { sm: 8, md: 12, lg: 14, pill: 999 };
-export const icon = { xs: 16, sm: 20, md: 24, lg: 44 };
-export const hit = 44; // minimum touch target
+// ── Spacing & Layout Tokens (design px) ───────────────────
+export const space = { xs: 2, sm: 4, md: 6, lg: 8, xl: 12 };
+export const radius = { sm: 4, md: 8, lg: 14, pill: 999 };
+export const icon = { xs: 10, sm: 12, md: 14, lg: 28 };
+export const hit = 44; // minimum touch target (kept for accessibility)
 
 export const hitSlop = { top: 12, bottom: 12, left: 12, right: 12 };
 
@@ -89,7 +73,7 @@ export const cardStyle: ViewStyle = {
   borderWidth: 1,
   borderColor: colors.border,
   borderRadius: radius.md,
-  padding: space.lg,
+  padding: 9,
   shadowColor: 'rgba(20,30,60,1)',
   shadowOffset: { width: 0, height: 1 },
   shadowOpacity: 0.05,
@@ -97,7 +81,7 @@ export const cardStyle: ViewStyle = {
   elevation: 1,
 };
 
-// ── Typography Tokens ───────────────────────────────────────────
+// ── Typography Tokens (original design px from Main.dc.html) ──
 export const fontFamilies = {
   regular: 'Poppins_400Regular',
   medium: 'Poppins_500Medium',
@@ -106,17 +90,16 @@ export const fontFamilies = {
 };
 
 export const font = {
-  display:    { fontFamily: fontFamilies.bold,     fontSize: 30, lineHeight: 36 },
-  amountLg:   { fontFamily: fontFamilies.bold,     fontSize: 24, lineHeight: 30 },
-  title:      { fontFamily: fontFamilies.bold,     fontSize: 20, lineHeight: 26 },
-  timer:      { fontFamily: fontFamilies.bold,     fontSize: 18, lineHeight: 24 },
-  name:       { fontFamily: fontFamilies.bold,     fontSize: 16, lineHeight: 22 },
-  section:    { fontFamily: fontFamilies.semiBold, fontSize: 15, lineHeight: 22 },
-  button:     { fontFamily: fontFamilies.semiBold, fontSize: 16, lineHeight: 22 },
-  amount:     { fontFamily: fontFamilies.bold,     fontSize: 15, lineHeight: 20 },
-  bodyStrong: { fontFamily: fontFamilies.semiBold, fontSize: 14, lineHeight: 20 },
-  body:       { fontFamily: fontFamilies.regular,  fontSize: 13, lineHeight: 20 },
-  label:      { fontFamily: fontFamilies.medium,   fontSize: 12, lineHeight: 16 },
-  caption:    { fontFamily: fontFamilies.regular,  fontSize: 11, lineHeight: 14 },
-};
-
+  display:    { fontFamily: fontFamilies.bold,     fontSize: 21, lineHeight: 26 },
+  amountLg:   { fontFamily: fontFamilies.bold,     fontSize: 16.5, lineHeight: 26 },
+  title:      { fontFamily: fontFamilies.bold,     fontSize: 14.5, lineHeight: 17 },
+  timer:      { fontFamily: fontFamilies.bold,     fontSize: 10, lineHeight: 24 },
+  name:       { fontFamily: fontFamilies.bold,     fontSize: 10.5, lineHeight: 14 },
+  section:    { fontFamily: fontFamilies.bold,     fontSize: 7.5, lineHeight: 12 },
+  button:     { fontFamily: fontFamilies.semiBold, fontSize: 8, lineHeight: 11 },
+  amount:     { fontFamily: fontFamilies.bold,     fontSize: 8, lineHeight: 10 },
+  bodyStrong: { fontFamily: fontFamilies.semiBold, fontSize: 7, lineHeight: 11 },
+  body:       { fontFamily: fontFamilies.regular,  fontSize: 6.5, lineHeight: 11 },
+  label:      { fontFamily: fontFamilies.medium,   fontSize: 6.5, lineHeight: 9 },
+  caption:    { fontFamily: fontFamilies.regular,  fontSize: 5.5, lineHeight: 9 },
+} as const;

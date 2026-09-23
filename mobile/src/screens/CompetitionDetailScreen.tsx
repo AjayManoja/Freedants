@@ -148,8 +148,6 @@ export function CompetitionDetailScreen({ slug }: CompetitionDetailScreenProps) 
   };
 
   // ── Payment Flow ─────────────────────────────────────
-  // Reserves a spot (or reuses a pending one), simulates the gateway, then
-  // confirms or cancels the registration. Throws { error } on failure.
   const handlePay = async (_method: PayMethod, shouldSucceed: boolean): Promise<string> => {
     let registrationId = me.registrationId;
     if (status !== 'pending' || !registrationId) {
@@ -157,7 +155,6 @@ export function CompetitionDetailScreen({ slug }: CompetitionDetailScreenProps) 
       registrationId = reg._id;
     }
 
-    // Stand-in for the Razorpay checkout round trip
     await new Promise((r) => setTimeout(r, 1800));
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const paymentId = 'pay_' + Array.from({ length: 14 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
@@ -209,8 +206,6 @@ export function CompetitionDetailScreen({ slug }: CompetitionDetailScreenProps) 
     setUploading(true);
     setUploadProgress(0);
 
-    // fetch() doesn't report upload progress, so show indeterminate progress
-    // that stops at 90% until the server responds.
     let p = 0;
     const interval = setInterval(() => {
       p = Math.min(90, p + 6);
@@ -249,7 +244,6 @@ export function CompetitionDetailScreen({ slug }: CompetitionDetailScreenProps) 
 
   const handleReferNow = async () => {
     if (!referralUrl) return;
-    // expo-sharing shares files not URLs, so just copy + toast
     await Clipboard.setStringAsync(referralUrl);
     showToast(`${t.referralCopied} ${fmt(t.earnPerSignup, { amount: comp.referral.rewardPerSignup })}`);
   };
@@ -262,7 +256,6 @@ export function CompetitionDetailScreen({ slug }: CompetitionDetailScreenProps) 
     setActiveSheet('video');
   };
 
-  // The user's own submission is private, so it's streamed with the auth header
   const playSubmission = () => {
     const sub = submissionQuery.data;
     if (!sub?.playbackPath) return;
@@ -427,7 +420,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
-  // Content column: full width on phones, capped and centred on tablets
   column: {
     width: '100%',
     maxWidth: MAX_CONTENT_WIDTH,
@@ -438,7 +430,7 @@ const styles = StyleSheet.create({
     maxWidth: MAX_CONTENT_WIDTH + 2 * GUTTER,
     alignSelf: 'center',
     paddingHorizontal: GUTTER,
-    paddingVertical: space.xs,
+    paddingVertical: 1,
   },
   scroll: {
     flex: 1,
@@ -448,20 +440,14 @@ const styles = StyleSheet.create({
     maxWidth: MAX_CONTENT_WIDTH + 2 * GUTTER,
     alignSelf: 'center',
     paddingHorizontal: GUTTER,
-    paddingTop: space.sm,
-    // CTA and nav sit outside the ScrollView, so only breathing room is needed here
-    paddingBottom: space.xl,
-    gap: space.md,
+    paddingTop: 0,
+    paddingBottom: space.md,
+    gap: 0,
   },
   ctaWrap: {
     backgroundColor: colors.white,
     paddingHorizontal: GUTTER,
-    paddingVertical: space.md,
-    shadowColor: 'rgba(20,30,60,1)',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 6,
-    elevation: 8,
+    paddingVertical: 3,
   },
   center: {
     flex: 1,

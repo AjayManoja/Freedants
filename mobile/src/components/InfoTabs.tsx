@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { colors, cardStyle, font, space, radius, hitSlop, useLayout } from '../theme';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { colors, cardStyle, fontFamilies, hitSlop } from '../theme';
 import Svg, { Path } from 'react-native-svg';
 import { useLocale } from '../i18n/LocaleContext';
-
 
 export interface InfoTabsProps {
   about: string[];
@@ -11,9 +10,10 @@ export interface InfoTabsProps {
   rules: string[];
 }
 
+const TAB_WIDTHS = [94, 110, 100];
+
 export function InfoTabs({ about, judgingParameters, rules }: InfoTabsProps) {
   const { t } = useLocale();
-  const { isWide } = useLayout();
   const [activeTab, setActiveTab] = useState(0);
   const [expanded, setExpanded] = useState(false);
   const tabs = [t.aboutCompetition, t.judgingParameters, t.rulesEligibility];
@@ -25,16 +25,19 @@ export function InfoTabs({ about, judgingParameters, rules }: InfoTabsProps) {
     return (
       <TouchableOpacity
         key={tab}
-        style={[styles.tab, isWide && styles.tabFixed, active && styles.tabActive]}
+        style={[
+          styles.tab,
+          { width: TAB_WIDTHS[i] ?? 100 },
+          active && styles.tabActive,
+        ]}
         onPress={() => { setActiveTab(i); setExpanded(false); }}
         accessibilityRole="tab"
         accessibilityState={{ selected: active }}
+        hitSlop={hitSlop}
       >
         <Text
           style={[styles.tabText, active && styles.tabTextActive]}
           numberOfLines={1}
-          adjustsFontSizeToFit={isWide}
-          minimumFontScale={0.85}
           maxFontSizeMultiplier={1.3}
         >
           {tab}
@@ -47,14 +50,7 @@ export function InfoTabs({ about, judgingParameters, rules }: InfoTabsProps) {
   return (
     <View style={styles.card}>
       <View style={styles.tabRow}>
-        {/* Wide screens: three equal tabs as in the design. Regular: scrollable tab bar (MOBILE_SIZING §4.6). */}
-        {isWide ? (
-          <View style={styles.fixedTabs}>{tabButtons}</View>
-        ) : (
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-            {tabButtons}
-          </ScrollView>
-        )}
+        {tabButtons}
       </View>
       <View style={styles.content}>
         {displayContent.map((text, i) => (
@@ -65,9 +61,10 @@ export function InfoTabs({ about, judgingParameters, rules }: InfoTabsProps) {
             style={styles.moreBtn} 
             onPress={() => setExpanded(!expanded)}
             hitSlop={hitSlop}
+            accessibilityRole="button"
           >
             <Text style={styles.moreText}>{expanded ? t.viewLess : t.viewMore}</Text>
-            <Svg width={12} height={8} viewBox="0 0 7 5" style={{ transform: [{ rotate: expanded ? '180deg' : '0deg' }], marginLeft: space.xs }}>
+            <Svg width={7} height={5} viewBox="0 0 7 5" style={{ transform: [{ rotate: expanded ? '180deg' : '0deg' }] }}>
               <Path d="M0.8 0.8L3.5 3.8 6.2 0.8" fill="none" stroke={colors.primary} strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" />
             </Svg>
           </TouchableOpacity>
@@ -78,17 +75,65 @@ export function InfoTabs({ about, judgingParameters, rules }: InfoTabsProps) {
 }
 
 const styles = StyleSheet.create({
-  card: { ...cardStyle, borderRadius: radius.md, padding: 0 },
-  tabRow: { borderBottomWidth: 1, borderBottomColor: colors.border },
-  scrollContent: { paddingHorizontal: space.lg },
-  tab: { minHeight: 44, paddingVertical: space.md, paddingHorizontal: space.sm, marginRight: space.md, justifyContent: 'center' },
-  fixedTabs: { flexDirection: 'row', paddingHorizontal: space.sm },
-  tabFixed: { flex: 1, marginRight: 0, alignItems: 'center', paddingHorizontal: space.xs },
-  tabActive: { borderBottomWidth: 2, borderBottomColor: colors.primary },
-  tabText: { ...font.body, color: colors.textInactiveTab },
-  tabTextActive: { ...font.bodyStrong, color: colors.primary },
-  content: { padding: space.lg },
-  bodyText: { ...font.body, color: colors.textBody, marginBottom: space.xs },
-  moreBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: space.md, minHeight: 44 },
-  moreText: { ...font.bodyStrong, color: colors.primary }
+  card: {
+    ...cardStyle,
+    borderRadius: 8,
+    paddingHorizontal: 9,
+    paddingVertical: 0,
+    marginTop: 4,
+  },
+  tabRow: {
+    flexDirection: 'row',
+    height: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E6E9EE',
+  },
+  tab: {
+    height: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 0,
+    backgroundColor: 'transparent',
+  },
+  tabActive: {
+    borderBottomWidth: 1.5,
+    borderBottomColor: colors.primary,
+    marginBottom: -1,
+  },
+  tabText: {
+    fontFamily: fontFamilies.medium,
+    fontSize: 7,
+    fontWeight: '500',
+    color: colors.textInactiveTab,
+    lineHeight: 11,
+  },
+  tabTextActive: {
+    fontFamily: fontFamilies.semiBold,
+    fontWeight: '600',
+    color: colors.primary,
+  },
+  content: {
+    marginTop: 9,
+  },
+  bodyText: {
+    fontFamily: fontFamilies.regular,
+    fontSize: 6.5,
+    color: '#6C7286',
+    lineHeight: 11,
+  },
+  moreBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 1,
+    gap: 8,
+  },
+  moreText: {
+    fontFamily: fontFamilies.semiBold,
+    fontSize: 6.5,
+    fontWeight: '600',
+    color: colors.primary,
+    lineHeight: 11,
+  },
 });
