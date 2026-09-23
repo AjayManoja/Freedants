@@ -8,8 +8,9 @@ import { config } from '../config';
  * Replace with real token verification (JWT / session) before going live.
  */
 export const auth = (req: Request, res: Response, next: NextFunction) => {
-  const header = req.headers['x-demo-user-id'] || req.query['x-demo-user-id'];
-  const userId = (Array.isArray(header) ? header[0] : header) || (config.isProduction ? undefined : config.demoUserId);
+  let raw = req.headers['x-demo-user-id'] || req.query['x-demo-user-id'];
+  if (Array.isArray(raw)) raw = raw[0];
+  const userId = (typeof raw === 'string' ? raw : undefined) || (config.isProduction ? undefined : config.demoUserId);
 
   if (!userId) {
     return res.status(401).json({ error: 'UNAUTHORIZED' });
