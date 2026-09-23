@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 390, // MAX_CONTENT_WIDTH + 2 * GUTTER
     alignSelf: 'center',
+    marginHorizontal: 'auto',
   },
   item: {
     alignItems: 'center',

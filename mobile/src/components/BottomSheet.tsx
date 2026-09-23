@@ -82,7 +82,10 @@ export function BottomSheet({ visible, onClose, children, dismissible = true }: 
 
   return (
     <Modal visible={visible} transparent animationType="slide" onRequestClose={() => dismissible && onClose()}>
-      <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      {/* Invisible pressable to dismiss when clicking outside the mobile frame */}
+      <Pressable style={[StyleSheet.absoluteFill, { cursor: 'default' as any }]} onPress={() => dismissible && onClose()} />
+      
+      <KeyboardAvoidingView style={styles.modalWrapper} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <Animated.View style={[StyleSheet.absoluteFill, styles.backdrop, { opacity: backdropOpacity }]} />
         <Pressable style={styles.flex} onPress={() => dismissible && onClose()} accessibilityRole="button" accessibilityLabel={t.close} />
         <Animated.View style={[styles.sheet, { transform: [{ translateY }] }]} {...panResponder.panHandlers}>
@@ -107,6 +110,15 @@ export function BottomSheet({ visible, onClose, children, dismissible = true }: 
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
+  modalWrapper: {
+    flex: 1,
+    width: '100%',
+    maxWidth: 390,
+    alignSelf: 'center',
+    marginHorizontal: 'auto',
+    height: '100%',
+    position: 'relative',
+  },
   backdrop: {
     backgroundColor: colors.backdrop,
   },
@@ -117,9 +129,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: space.lg,
     paddingBottom: space.xl,
     maxHeight: '88%',
-    width: '100%',
-    maxWidth: 390,
-    alignSelf: 'center',
   },
   // Taller than the visible handle so it's easy to grab
   handleArea: {
