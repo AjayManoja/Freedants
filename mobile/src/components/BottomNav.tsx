@@ -81,7 +81,7 @@ export function BottomNav({ onNavPress, avatarUrl }: BottomNavProps = {}) {
         onPress={() => onNavPress?.(t.profile)}
       >
         <Image
-          source={avatarUrl ? { uri: avatarUrl } : FALLBACK_AVATAR}
+          source={(avatarUrl && !avatarUrl.includes('profile.jpg')) ? { uri: avatarUrl } : FALLBACK_AVATAR}
           defaultSource={FALLBACK_AVATAR}
           style={styles.avatar}
           accessibilityLabel="Your profile photo"

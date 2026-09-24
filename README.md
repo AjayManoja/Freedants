@@ -39,8 +39,19 @@ npm run seed                # competition, demo user and reviews
 npm run dev                 # http://localhost:3001
 ```
 
-### 2. Mobile app
+### 2. Mobile app (or Web)
 
+You can run the app on a phone, an emulator, or directly in a web browser!
+
+**To run in a Web Browser (Recommended for quick testing):**
+```bash
+cd mobile
+npm install
+npx expo start --web
+```
+*This will automatically open the app at `http://localhost:8081`.*
+
+**To run on a phone (Expo Go) or Emulator:**
 ```bash
 cd mobile
 npm install
