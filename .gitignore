@@ -27,6 +27,21 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
+# IDE and agent configs
+.agents/
+.vscode/
+.idea/
+
+# Dev-only deploy/MCP scripts (may contain secrets)
+deploy-*.js
+*-mcp.js
+get-owners.js
+scaleDownSheets.js
+
+# Documents not part of the codebase
+*.pdf
+MOBILE_SIZING.md
+
 # Not needed to run or review the project
 *_PROMPT.md
 HANDOFF.md
@@ -34,3 +49,6 @@ reference/
 design/*.html
 assets/*.png
 application_*.jpeg
+
+# Test artifacts
+server/testfile
