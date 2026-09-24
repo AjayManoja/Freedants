@@ -164,6 +164,7 @@ This table maps the assignment's requirements to where each is handled.
 │
 ├── mobile/                     React Native (Expo SDK 52 + TypeScript)
 │   ├── App.tsx                 fonts, React Query, safe area, locale providers
+│   ├── assets/profile.jpg      fallback avatar (bundled locally for Metro)
 │   └── src/
 │       ├── api/                typed client, React Query hooks, types
 │       ├── components/         one component per section, plus shared pieces
@@ -175,9 +176,8 @@ This table maps the assignment's requirements to where each is handled.
 │       ├── config.ts           EXPO_PUBLIC_* runtime config
 │       └── theme.ts            colour, spacing, radius, icon and type tokens, plus useLayout()
 │
-├── assets/thumbs/              optimised images the API links to (served at /assets, cached 7 days)
-├── design/seed-competition.json  seed data, including Hindi translations
-└── MOBILE_SIZING.md            sizing spec for real devices
+├── assets/thumbs/              optimised images served by the API (cached 7 days)
+└── design/seed-competition.json  seed data, including Hindi translations
 ```
 
 ### API
@@ -240,7 +240,7 @@ Caching, background refetch every 30 seconds, refetch when the app regains focus
 The layout strictly follows the 390px pixel-perfect design constraints. On Web and Desktop browsers, the application centers itself as a mobile-sized frame (390px wide) rather than stretching horizontally.
 
 ### Images
-The images in `assets/` are 1.5–2 MB each. The API links to optimised copies in `assets/thumbs/`: 256px for avatars and 360px for winner tiles, about 140 KB for all six. Remote images show a spinner until they load. Tapping anywhere on the judge card or a winner tile plays the video, not just the small play button.
+The API serves optimised images from `assets/thumbs/` (256px for avatars, 360px for winner tiles, about 140 KB total for all six), cached for 7 days. Remote images show a spinner until they load. The bottom nav uses a local copy of the profile image as a fallback avatar. Tapping anywhere on the judge card or a winner tile plays the video, not just the small play button.
 
 ### Mobile sizing
 To satisfy exact pixel-level reproduction requirements, the application strictly uses the exact 1x design specifications from the original mockups. All fonts, spacing, heights, and margins directly correspond to the pixel values provided (e.g., 7.5px fonts, 18px gutters, 26px headers). The UI renders at a strict 390px maximum width to ensure the multi-column sections (Dates, Winners, Rewards) fit perfectly side-by-side as they do in the reference design. The tokens are maintained in `mobile/src/theme.ts`.
