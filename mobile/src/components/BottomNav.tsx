@@ -5,7 +5,7 @@ import { colors, font, space, radius, icon, hitSlop, fontFamilies } from '../the
 import Svg, { Path, Circle } from 'react-native-svg';
 import { useLocale } from '../i18n/LocaleContext';
 
-const FALLBACK_AVATAR = require('../../../assets/thumbs/profile.jpg');
+const FALLBACK_AVATAR = require('../../assets/profile.jpg');
 
 export interface BottomNavProps {
   onNavPress?: (tab: string) => void;
